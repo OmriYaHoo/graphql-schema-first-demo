@@ -37,7 +37,7 @@ public class TalkService {
                 .collect(Collectors.toList());
     }
 
-    public List<Talk> findAllTAlksByAttendee(Attendee attendee) {
+    public List<Talk> findAllTalksByAttendee(Attendee attendee) {
         List<AttendeeTalk> st = attendeeTalkRepository.findAllByAttendeeId(attendee.getId());
 
         return st.stream()

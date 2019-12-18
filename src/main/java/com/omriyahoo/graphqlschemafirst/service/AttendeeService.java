@@ -5,7 +5,6 @@ import com.omriyahoo.graphqlschemafirst.pojo.AttendeeTalk;
 import com.omriyahoo.graphqlschemafirst.pojo.Talk;
 import com.omriyahoo.graphqlschemafirst.repository.AttendeeRepository;
 import com.omriyahoo.graphqlschemafirst.repository.AttendeeTalkRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,17 +14,20 @@ import java.util.stream.Collectors;
 @Service
 public class AttendeeService {
 
-    @Autowired
-    private AttendeeRepository attendeeRepository;
+    private final AttendeeRepository attendeeRepository;
 
-    @Autowired
-    private AttendeeTalkRepository attendeeTalkRepository;
+    private final AttendeeTalkRepository attendeeTalkRepository;
+
+    public AttendeeService(AttendeeRepository attendeeRepository, AttendeeTalkRepository attendeeTalkRepository) {
+        this.attendeeRepository = attendeeRepository;
+        this.attendeeTalkRepository = attendeeTalkRepository;
+    }
 
     public List<Attendee> findAll() {
         return attendeeRepository.findAll();
     }
 
-    public List<Attendee> findAllAttendiesForTalk(Talk talk) {
+    public List<Attendee> findAllAttendeesForTalk(Talk talk) {
         List<AttendeeTalk> at = attendeeTalkRepository.findAllByTalkId(talk.getId());
 
         return at.stream()

@@ -5,7 +5,6 @@ import com.omriyahoo.graphqlschemafirst.pojo.SpeakerTalk;
 import com.omriyahoo.graphqlschemafirst.pojo.Talk;
 import com.omriyahoo.graphqlschemafirst.repository.SpeakerRepository;
 import com.omriyahoo.graphqlschemafirst.repository.SpeakerTalkRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,11 +14,14 @@ import java.util.stream.Collectors;
 @Service
 public class SpeakerService {
 
-    @Autowired
-    private SpeakerRepository speakerRepository;
+    private final SpeakerRepository speakerRepository;
 
-    @Autowired
-    private SpeakerTalkRepository speakerTalkRepository;
+    private final SpeakerTalkRepository speakerTalkRepository;
+
+    public SpeakerService(SpeakerRepository speakerRepository, SpeakerTalkRepository speakerTalkRepository) {
+        this.speakerRepository = speakerRepository;
+        this.speakerTalkRepository = speakerTalkRepository;
+    }
 
     public List<Speaker> findAll() {
         return speakerRepository.findAll();
