@@ -1,2 +1,5 @@
 server:
   port: 8585
+
+graphiql:
+  mapping: /graphiql
